@@ -6,7 +6,7 @@ Name:           nodejs18
 # WARNINGS: MUST check and update the 'npm_version' macro for every version update of this package.
 #           The version of NPM can be found inside the sources under 'deps/npm/package.json'.
 Version:        18.16.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        BSD and MIT and Public Domain and NAIST-2003 and Artistic-2.0
 Group:          Applications/System
 Vendor:         Microsoft Corporation
@@ -80,10 +80,18 @@ python3 configure.py \
   --without-dtrace \
   --openssl-use-def-ca-store
 
+# Use ninja for faster builds on x64
+# For ARM64, due to OOM issues, build with make
+
+%ifarch x86_64
 # Some build scripts expect a "python" executable - create symlink to python3
 ln -sv /usr/bin/python3 /usr/bin/python
-
 %ninja_build -C out/Release
+%endif
+
+%ifarch aarch64
+JOBS=4 make %{?_smp_mflags} V=0
+%endif
 
 %install
 
