@@ -12,7 +12,7 @@
 Summary:        Apache Maven
 Name:           maven
 Version:        3.8.7
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        ASL 2.0
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
