@@ -12,7 +12,7 @@
 
 Name:           reaper
 Version:        3.1.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Reaper for cassandra is a tool for running Apache Cassandra repairs against single or multi-site clusters.
 License:        ASL 2.0
 Distribution:   Mariner
