@@ -26,12 +26,13 @@ install_one_toolchain_rpm () {
     error_msg_tail="Inspect $chroot_log for more info. Did you hydrate the toolchain?"
 
     echo "Adding RPM to worker chroot: $1." | tee -a "$chroot_log"
-
+    tree | tee -a "$chroot_log"
     full_rpm_path=$(find -D all "$rpm_path" -name "$1" -type f 2>>"$chroot_log")
     if [ ! $? -eq 0 ] || [ -z "$full_rpm_path" ]
     then
         echo "Failed to locate package $1 in ($rpm_path), aborting. $error_msg_tail" | tee -a "$chroot_log"
         echo "Full path: ($full_rpm_path)" | tee -a "$chroot_log"
+        tree | tee -a "$chroot_log"
         exit 1
     fi
 
