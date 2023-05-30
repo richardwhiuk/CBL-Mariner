@@ -2,7 +2,7 @@
 Summary:        SpiderMonkey JavaScript library
 Name:           mozjs%{major}
 Version:        60.9.0
-Release:        11%{?dist}
+Release:        12%{?dist}
 License:        MPLv2.0 AND MPLv1.1 AND BSD AND GPLv2+ AND GPLv3+ AND LGPLv2+ AND AFL AND ASL 2.0
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -61,6 +61,9 @@ popd
 
 # Remove zlib directory (to be sure using system version)
 rm -rf ../../modules/zlib
+
+# Test that we truly don't use this file
+rm ../../media/ffvpx/libavcodec/pthread_frame.c
 
 %build
 # Enable LTO
