@@ -6,7 +6,7 @@
 Summary:        GRand Unified Bootloader
 Name:           grub2
 Version:        2.06
-Release:        10%{?dist}
+Release:        11%{?dist}
 License:        GPLv3+
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -291,7 +291,7 @@ cp $GRUB_PXE_MODULE_SOURCE $EFI_BOOT_DIR/$GRUB_PXE_MODULE_NAME
 %{_bindir}/*
 %{_datarootdir}/grub/*
 %{_sysconfdir}/sysconfig/grub
-%{_sysconfdir}/default/grub
+%attr(0644,root,root) %ghost %config(noreplace) %{_sysconfdir}/default/grub
 %ghost %config(noreplace) /boot/%{name}/grub.cfg
 
 %ifarch x86_64
@@ -327,6 +327,9 @@ cp $GRUB_PXE_MODULE_SOURCE $EFI_BOOT_DIR/$GRUB_PXE_MODULE_NAME
 %endif
 
 %changelog
+* Wed Jul 21 2023 Ievgen Priadka <ipriadka@linkedin.com> - 2.06-11
+- Maintain changes in /etc/default/grub
+
 * Thu Jun 08 2023 Daniel McIlvaney <damcilva@microsoft.com> - 2.06-10
 - CVE-2022-3775
 
