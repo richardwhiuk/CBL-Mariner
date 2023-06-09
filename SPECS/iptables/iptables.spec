@@ -1,7 +1,7 @@
 Summary:        Linux kernel packet control tool
 Name:           iptables
 Version:        1.8.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -98,6 +98,9 @@ find %{buildroot} -type f -name "*.la" -delete -print
 %{_mandir}/man3/*
 
 %changelog
+* Tue Jun 13 2023 Rachel Menge <rachelmenge@microsoft.com> - 1.8.7-3
+- Allow multicast packets
+
 * Wed May 31 2023 Rachel Menge <rachelmenge@microsoft.com> - 1.8.7-2
 - Modify defaults to account for DHCPv6
 

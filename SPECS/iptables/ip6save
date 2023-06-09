@@ -37,5 +37,7 @@
 -A INPUT -p icmpv6 --icmpv6-type 141 -j ACCEPT
 # Inverse Neighbour Discovery Advertisement
 -A INPUT -p icmpv6 --icmpv6-type 142 -j ACCEPT
+-A INPUT -m pkttype --pkt-type multicast -j ACCEPT
+-A FORWARD -m pkttype --pkt-type multicast -j ACCEPT
 -A OUTPUT -j ACCEPT
 COMMIT
