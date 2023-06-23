@@ -49,6 +49,7 @@ pushd "$temp_dir" &> /dev/null
     pushd "$directory_name" &> /dev/null
         echo "Fetching dependencies to a temporary cache."
         CARGO_HOME=$(pwd)/.cargo cargo fetch
+        CARGO_HOME=$(pwd)/.cargo cargo update -p ssh2 --aggressive
 
         echo "Compressing the cache."
         tar --sort=name --mtime="2021-04-26 00:00Z" --owner=0 --group=0 --numeric-owner --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime -cf "$cache_tarball_name" .cargo
