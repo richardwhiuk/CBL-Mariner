@@ -36,7 +36,7 @@ popd
 %patch1 -p1
 
 %build
-cargo build --release
+cargo build --release --offline
 
 %install
 install -d %{buildroot}%{_bindir}
