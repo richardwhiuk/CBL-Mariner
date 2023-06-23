@@ -1,7 +1,7 @@
 Summary:        A Rust-VMM based cloud hypervisor from Intel
 Name:           cloud-hypervisor
 Version:        22.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 License:        ASL 2.0 or BSD
 URL:            https://github.com/cloud-hypervisor/cloud-hypervisor
 Group:          Development/Tools
@@ -53,7 +53,7 @@ install -d %{buildroot}%{_libdir}/cloud-hypervisor
 %exclude %{_libdir}/debug
 
 %changelog
-* Fri Jun 23 2023 Suresh Thelkar <sthelkar@microsoft.com> - 22.0-4
+* Fri Jun 23 2023 Suresh Thelkar <sthelkar@microsoft.com> - 22.0-5
 - Updating cargo cache
 
 * Thu Jun 15 2023 Suresh Thelkar <sthelkar@microsoft.com> - 22.0-3
