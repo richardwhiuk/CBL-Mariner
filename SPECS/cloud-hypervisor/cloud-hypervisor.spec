@@ -8,7 +8,8 @@ Group:          Development/Tools
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
 Source0:        %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Source1:        %{name}-%{version}-%{release}-cargo.tar.gz
+# Source1:        %{name}-%{version}-%{release}-cargo.tar.gz
+Source1:        %{name}-%{version}-9.cm1-cargo.tar.gz
 Source2:        %{name}-%{version}-%{release}-vendor.tar.gz
 Patch0:         CVE-2023-28448.patch
 Patch1:         CVE-2023-2650-CVE-2023-0465.patch
