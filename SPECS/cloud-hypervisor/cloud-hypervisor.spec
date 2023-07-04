@@ -9,8 +9,9 @@ Vendor:         Microsoft Corporation
 Distribution:   Mariner
 Source0:        %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 # Source1:        %{name}-%{version}-%{release}-cargo.tar.gz
-Source1:        %{name}-%{version}-9.cm1-cargo.tar.gz
-Source2:        %{name}-%{version}-%{release}-vendor.tar.gz
+Source1:        %{name}-%{version}-10.cm1-cargo.tar.gz
+# Source2:        %{name}-%{version}-%{release}-vendor.tar.gz
+Source2:        %{name}-%{version}-4.cm1-vendor.tar.gz
 Patch0:         CVE-2023-28448.patch
 Patch1:         CVE-2023-2650-CVE-2023-0465.patch
 ExclusiveArch:  x86_64
@@ -32,8 +33,8 @@ tar xf %{SOURCE1} --no-same-owner
 %patch0 -p1
 popd
 %setup -q
-tar xf %{SOURCE2} --no-same-owner
 %patch1 -p1
+tar xf %{SOURCE2} -C ../ --no-same-owner
 
 %build
 cargo build --release --offline
