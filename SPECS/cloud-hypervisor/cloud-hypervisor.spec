@@ -27,11 +27,11 @@ A Rust-VMM based cloud hypervisor from Intel.
 
 %prep
 # Setup .cargo directory
-mkdir -p $HOME
-pushd $HOME
+# mkdir -p $HOME
+# pushd $HOME
 tar xf %{SOURCE1} --no-same-owner
 %patch0 -p1
-popd
+# popd
 %setup -q
 %patch1 -p1
 tar xf %{SOURCE2} -C ../ --no-same-owner
