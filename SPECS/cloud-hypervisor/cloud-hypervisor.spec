@@ -37,7 +37,7 @@ tar xf %{SOURCE1} --no-same-owner
 tar xf %{SOURCE2} -C ../ --no-same-owner
 
 %build
-cargo build --release --offline
+CARGO_HOME=$(pwd)/../.cargo cargo build --release --offline
 
 %install
 install -d %{buildroot}%{_bindir}
