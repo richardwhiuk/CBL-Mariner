@@ -95,9 +95,7 @@ $(STATUS_FLAGS_DIR)/validate-image-config%.flag: $(go-imageconfigvalidator) $(de
 
 
 imagepkgfetcher_extra_flags :=
-ifeq ($(DISABLE_UPSTREAM_REPOS),y)
 imagepkgfetcher_extra_flags += --disable-upstream-repos
-endif
 
 ifeq ($(DISABLE_DEFAULT_REPOS),y)
 imagepkgfetcher_extra_flags += --disable-default-repos

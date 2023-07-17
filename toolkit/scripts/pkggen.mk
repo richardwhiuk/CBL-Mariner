@@ -127,9 +127,7 @@ endif
 graphpkgfetcher_extra_flags :=
 
 graphpkgfetcher_extra_flags :=
-ifeq ($(DISABLE_UPSTREAM_REPOS),y)
 graphpkgfetcher_extra_flags += --disable-upstream-repos
-endif
 
 ifeq ($(DISABLE_DEFAULT_REPOS),y)
 graphpkgfetcher_extra_flags += --disable-default-repos
