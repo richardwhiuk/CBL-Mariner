@@ -1,7 +1,7 @@
 Summary:        Next generation system logger facilty
 Name:           syslog-ng
 Version:        3.33.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        BSD AND GPLv2+ AND LGPLv2+
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -10,6 +10,7 @@ URL:            https://syslog-ng.org/
 Source0:        https://github.com/balabit/%{name}/releases/download/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:        60-syslog-ng-journald.conf
 Source2:        syslog-ng.service
+Patch0:         CVE-2022-38725.patch
 BuildRequires:  glib-devel
 BuildRequires:  json-c-devel
 BuildRequires:  json-glib-devel
@@ -50,9 +51,7 @@ Requires:       %{name} = %{version}-%{release}
  needed to build applications using syslog-ng APIs.
 
 %prep
-%setup -q
-rm -rf ../p3dir
-cp -a . ../p3dir
+%autosetup -p1
 
 %build
 %configure \
@@ -147,7 +146,10 @@ fi
 %{_libdir}/pkgconfig/*
 
 %changelog
-* Mon Jan 31 2022 Thomas Crain <thcrain@microsoft.com> - 3.33.2-3
+* Wed Jun 19 2023 Olivia Crain <oliviacrain@microsoft.com> - 3.33.2-4
+- Add upstream patch for CVE-2022-38725
+
+* Mon Jan 31 2022 Olivia Crain <oliviacrain@microsoft.com> - 3.33.2-3
 - Remove python2 subpackage
 
 * Wed Jan 19 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 3.33.2-2
@@ -159,7 +161,7 @@ fi
 * Thu Dec 16 2021 Pawel Winogrodzki <pawelwi@microsoft.com> - 3.23.1-4
 - Removing the explicit %%clean stage.
 
-* Fri Dec 03 2021 Thomas Crain <thcrain@microsoft.com> - 3.23.1-3
+* Fri Dec 03 2021 Olivia Crain <oliviacrain@microsoft.com> - 3.23.1-3
 - Replace easy_install usage with pip in %%check sections
 
 * Tue Oct 13 2020 Pawel Winogrodzki <pawelwi@microsoft.com> 3.23.1-2
