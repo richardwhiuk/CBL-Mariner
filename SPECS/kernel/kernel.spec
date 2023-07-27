@@ -28,7 +28,7 @@
 Summary:        Linux Kernel
 Name:           kernel
 Version:        5.15.118.1
-Release:        2%{?dist}
+Release:        200%{?dist}
 License:        GPLv2
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -39,6 +39,7 @@ Source1:        config
 Source2:        config_aarch64
 Source3:        sha512hmac-openssl.sh
 Source4:        cbl-mariner-ca-20211013.pem
+Source5:        51_mariner
 Patch0:         nvme_multipath_default_false.patch
 BuildRequires:  audit-devel
 BuildRequires:  bash
@@ -65,6 +66,7 @@ BuildRequires:  sed
 BuildRequires:  pciutils-devel
 %endif
 Requires:       filesystem
+Requires:       grub2
 Requires:       kmod
 Requires(post): coreutils
 Requires(postun): coreutils
@@ -298,6 +300,10 @@ make -C tools DESTDIR=%{buildroot} prefix=%{_prefix} bash_compdir=%{_sysconfdir}
 # Remove trace (symlink to perf). This file causes duplicate identical debug symbols
 rm -vf %{buildroot}%{_bindir}/trace
 
+# Install grub2-mkconfig scriptlet
+mkdir -p %{buildroot}%{_sysconfdir}/grub.d/
+cp %{SOURCE5} %{buildroot}%{_sysconfdir}/grub.d/51_mariner
+
 %triggerin -- initramfs
 mkdir -p %{_localstatedir}/lib/rpm-state/initramfs/pending
 touch %{_localstatedir}/lib/rpm-state/initramfs/pending/%{uname_r}
@@ -313,6 +319,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %post
 /sbin/depmod -a %{uname_r}
+grub2-mkconfig -o /boot/grub2/grub.cfg
 
 %post drivers-accessibility
 /sbin/depmod -a %{uname_r}
@@ -335,6 +342,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 %defattr(0644,root,root)
 /lib/modules/%{uname_r}/*
 /lib/modules/%{uname_r}/.vmlinuz.hmac
+%config() %{_sysconfdir}/grub.d/51_mariner
 %exclude /lib/modules/%{uname_r}/build
 %exclude /lib/modules/%{uname_r}/kernel/drivers/accessibility
 %exclude /lib/modules/%{uname_r}/kernel/drivers/gpu

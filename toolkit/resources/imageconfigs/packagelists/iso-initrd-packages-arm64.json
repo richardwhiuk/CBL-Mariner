@@ -27,6 +27,7 @@
         "gmp",
         "gptfdisk",
         "grep",
+        "grub2",
         "grub2-efi-binary",
         "gzip",
         "haveged",

@@ -13,8 +13,8 @@ import (
 )
 
 func TestShouldReturnCorrectRequiredPackagesForArch(t *testing.T) {
-	arm64RequiredPackages := []*pkgjson.PackageVer{}
-	amd64RequiredPackages := []*pkgjson.PackageVer{{Name: "grub2-pc"}}
+	arm64RequiredPackages := []*pkgjson.PackageVer{{Name: "grub2"}}
+	amd64RequiredPackages := []*pkgjson.PackageVer{{Name: "grub2-pc"}, {Name: "grub2"}}
 
 	requiredPackages := GetRequiredPackagesForInstall()
 

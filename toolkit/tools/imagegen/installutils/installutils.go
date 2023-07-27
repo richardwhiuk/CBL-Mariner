@@ -64,6 +64,8 @@ func GetRequiredPackagesForInstall() []*pkgjson.PackageVer {
 		packageList = append(packageList, &pkgjson.PackageVer{Name: "grub2-pc"})
 	}
 
+	packageList = append(packageList, &pkgjson.PackageVer{Name: "grub2"})
+
 	return packageList
 }
 
@@ -1026,6 +1028,10 @@ func InstallGrubCfg(installRoot, rootDevice, bootUUID, bootPrefix string, encryp
 		logger.Log.Warnf("Failed to run grub2-mkconfig: %v", err)
 		logger.Log.Warn(stdout)
 		logger.Log.Warn(stderr)
+
+		stdout, stderr, err = shell.Execute("cat", grubConfFile)
+		logger.Log.Warn("grub2-mkconfig output file:\n")
+		logger.Log.Warn(stdout)
 		return err
 	}
 

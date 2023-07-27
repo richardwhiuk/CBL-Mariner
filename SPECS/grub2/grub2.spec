@@ -6,7 +6,7 @@
 Summary:        GRand Unified Bootloader
 Name:           grub2
 Version:        2.06
-Release:        12%{?dist}
+Release:        200%{?dist}
 License:        GPLv3+
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -154,6 +154,7 @@ export LDFLAGS
 
 export PYTHON=%{python3}
 ./bootstrap --no-git --gnulib-srcdir=./gnulib
+
 %ifarch x86_64
 mkdir build-for-pc
 pushd build-for-pc
@@ -228,6 +229,9 @@ touch %{buildroot}%{_sysconfdir}/default/grub
 mkdir %{buildroot}%{_sysconfdir}/sysconfig
 ln -sf %{_sysconfdir}/default/grub %{buildroot}%{_sysconfdir}/sysconfig/grub
 install -vdm 700 %{buildroot}/boot/%{name}
+set -x
+cp %{SOURCE3} %{buildroot}%{_sysconfdir}/grub.d/
+set +x
 touch %{buildroot}/boot/%{name}/grub.cfg
 chmod 400 %{buildroot}/boot/%{name}/grub.cfg
 rm -rf %{buildroot}%{_infodir}
@@ -279,15 +283,15 @@ cp $GRUB_PXE_MODULE_SOURCE $EFI_BOOT_DIR/$GRUB_PXE_MODULE_NAME
 %license COPYING
 %dir %{_sysconfdir}/grub.d
 %dir /boot/%{name}
-%config() %{_sysconfdir}/bash_completion.d/grub
-%config() %{_sysconfdir}/grub.d/00_header
-%config() %{_sysconfdir}/grub.d/10_linux
-%config() %{_sysconfdir}/grub.d/20_linux_xen
-%config() %{_sysconfdir}/grub.d/30_os-prober
-%config() %{_sysconfdir}/grub.d/30_uefi-firmware
+%exclude %{_sysconfdir}/bash_completion.d/grub
+%exclude %{_sysconfdir}/grub.d/00_header
+%exclude %{_sysconfdir}/grub.d/10_linux
+%exclude %{_sysconfdir}/grub.d/20_linux_xen
+%exclude %{_sysconfdir}/grub.d/30_os-prober
+%exclude %{_sysconfdir}/grub.d/30_uefi-firmware
 %config() %{_sysconfdir}/grub.d/31_systemd
-%config(noreplace) %{_sysconfdir}/grub.d/40_custom
-%config(noreplace) %{_sysconfdir}/grub.d/41_custom
+%exclude %{_sysconfdir}/grub.d/40_custom
+%exclude %{_sysconfdir}/grub.d/41_custom
 %{_sysconfdir}/grub.d/README
 /sbin/*
 %{_bindir}/*

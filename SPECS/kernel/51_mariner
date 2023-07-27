@@ -1,0 +1,10 @@
+#!/bin/sh
+cat <<EOF
+
+menuentry "CBL-Mariner" {
+        linux $bootprefix/$mariner_linux      rd.auto=1 root=$rootdevice $mariner_cmdline lockdown=integrity sysctl.kernel.unprivileged_bpf_disabled=1 $systemd_cmdline   $kernelopts
+        if [ -f $bootprefix/$mariner_initrd ]; then
+                initrd $bootprefix/$mariner_initrd
+        fi
+}
+EOF
